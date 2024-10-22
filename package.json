@@ -1,6 +1,6 @@
 {
   "name": "willhaben",
-  "version": "0.2.1",
+  "version": "0.1.0",
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CP02A/willhaben.git"
+    "url": "git+https://github.com/rafgenduke/willhabenAPI.git"
   },
-  "author": "Christian Proschek",
+  "author": "Christian Proschek, Rafgenduke",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CP02A/willhaben/issues"
+    "url": "https://github.com/rafgenduke/willhabenAPI/issues"
   },
-  "homepage": "https://github.com/CP02A/willhaben#readme",
+  "homepage": "https://github.com/rafgenduke/willhabenAPI#readme",
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
     "jenkins-mocha": "latest",

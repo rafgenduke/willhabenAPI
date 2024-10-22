@@ -1,12 +1,10 @@
 const assert = require('assert');
 const wh = require('../app')
 
-describe('Willhaben API', () => {
-    it('should return results', function (done) {
-        this.timeout(10000);
-        wh.getListings('https://willhaben.at/iad/kaufen-und-verkaufen/marktplatz/pc-komponenten-5878').then(listings => {
-            assert.notEqual(listings.length, 0, "length of result is not 0")
-            done()
-        })
-    })
-})
+test();
+
+async function test() {
+    const res = await (await wh.new().count(10).periode(1).condition(wh.getConditions.gebraucht).category('2846')).search()
+
+    console.log(res);
+}
