@@ -45,7 +45,7 @@ function getListings(url) {
             returnArray.push(returnObj);
           }
         );
-
+        console.log(url);
         res(returnArray);
       });
   });
@@ -329,6 +329,7 @@ class WillhabenSearch {
     this.searchPriceFrom = null;
     this.searchPriceTo = null;
     this.searchSortOrder = 0;
+    this.searchPrivate = null;
   }
 
   category(categoryId) {
@@ -418,6 +419,13 @@ class WillhabenSearch {
     return this;
   }
 
+  private(isPrivate) {
+    if (typeof isPrivate != "boolean")
+      throw new Error("IsPrivate must be a boolean value");
+    this.searchPrivate = isPrivate;
+    return this;
+  }
+
   getURL() {
     return `https://willhaben.at/iad/kaufen-und-verkaufen/marktplatz/-${
       this.searchCategory
@@ -435,9 +443,17 @@ class WillhabenSearch {
         : ""
     }${this.searchPeriode ? `&periode=${this.searchPeriode}` : ""}${
       this.searchPriceFrom != null ? `&PRICE_FROM=${this.searchPriceFrom}` : ""
-    }${this.searchPriceTo != null ? `&PRICE_TO=${this.searchPriceTo}` : ""}
-    ${this.searchSortOrder ? `&sort=${this.searchSortOrder}` : ""}
-    ${this.areaIds.length != 0 ? buildAreaFilter(this.searchAreaIds) : ""}`;
+    }${this.searchPriceTo != null ? `&PRICE_TO=${this.searchPriceTo}` : ""}${
+      this.searchSortOrder ? `&sort=${this.searchSortOrder}` : ""
+    }${
+      this.searchAreaIds.length != 0 ? buildAreaFilter(this.searchAreaIds) : ""
+    }${
+      this.searchPrivate == null
+        ? ""
+        : this.searchPrivate
+        ? "&ISPRIVATE=1"
+        : "&ISPRIVATE=0"
+    }`;
   }
 
   search() {

@@ -37,6 +37,7 @@ Method | Description
 .priceTo(int) | sets the maximum price to search for
 .sortBy(int) | sets sort order
 .areaIds([string]) | sets area ids to search for
+.private(boolean) | true if you want to search for private advertisements, false for retailer's
 .getURL() | get URL with the currently set variables
 .search() | executes search -> returns Promise
 

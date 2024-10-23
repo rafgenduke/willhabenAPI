@@ -11,6 +11,7 @@ async function test() {
     .sortBy(wh.getSortOrders.preisAbsteigend)
     .condition(wh.getConditions.gebraucht)
     .category("2846")
+    .private(true)
     //.areaIds([wh.getAreadId.niederoesterreich.melk, wh.getAreadId.niederoesterreich.amstetten])
     .search();
   console.log(res);
