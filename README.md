@@ -35,6 +35,7 @@ Method | Description
 .periode(int) | sets the periode, in days, in which to search for
 .priceFrom(int) | sets the minimum price to search for
 .priceTo(int) | sets the maximum price to search for
+.sortBy() | sets sort order
 .getURL() | get URL with the currently set variables
 .search() | executes search -> returns Promise
 
