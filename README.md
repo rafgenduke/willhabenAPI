@@ -49,6 +49,7 @@ Property | Constant Description
 ------------ | -------------
 .getConditions | get the integer for a condition
 .getTransferTypes | get the integer for a transfer type
+.getSortOrders | get the integer for a sort order
 
 **Getting Categories**
 
