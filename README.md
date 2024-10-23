@@ -26,7 +26,7 @@ The URL builder is obtainable with the `.new()` function. Then you can use vario
 **Available methods in the builder:**
 Method | Description
 ------------ | -------------
-.category(string) | sets the category id to search (default: all) (returns promise...)
+.category(string) | sets the category id to search (default: all)
 .condition(int) | adds a condition to search
 .transferType(int) | adds a transfer type to search
 .count(int) | sets the count of how many results should be searched for

@@ -91,15 +91,23 @@ async function scrapeCategories() {
 }
 
 function getCategoriesByName(categoryName) {
-  const fileContent = fs.readFileSync("./categories.json");
-  const categories = JSON.parse(fileContent);
-  return categories.filter((c) => c.label == categoryName);
+  try {
+    const fileContent = fs.readFileSync("./categories.json");
+    const categories = JSON.parse(fileContent);
+    return categories.filter((c) => c.label == categoryName);
+  } catch (err) {
+    throw new Error("categories.json could not be read in root")
+  }
 }
 
 function getCategoryById(categoryId) {
-  const fileContent = fs.readFileSync("./categories.json");
-  const categories = JSON.parse(fileContent);
-  return categories.filter((c) => c.id == categoryId)[0];
+  try {
+    const fileContent = fs.readFileSync("./categories.json");
+    const categories = JSON.parse(fileContent);
+    return categories.filter((c) => c.id == categoryId)[0];
+  } catch (err) {
+    throw new Error("categories.json could not be read in root")
+  }
 }
 
 const conditions = Object.freeze({
