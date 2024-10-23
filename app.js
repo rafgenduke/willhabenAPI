@@ -126,6 +126,14 @@ const transferType = Object.freeze({
 });
 exports.getTransferTypes = transferType;
 
+const sortOrders = Object.freeze({
+  aktualitaet: 1,
+  preisAufsteigend: 3,
+  preisAbsteigend: 4,
+  relevanz: 7
+})
+exports.getSortOrders = sortOrders;
+
 exports.new = () => new WillhabenSearch();
 
 class WillhabenSearch {
@@ -138,6 +146,7 @@ class WillhabenSearch {
     this.searchPeriode = 0;
     this.searchPriceFrom = null;
     this.searchPriceTo = null;
+    this.searchSortOrder = 0
   }
 
   category(categoryId) {
@@ -217,6 +226,11 @@ class WillhabenSearch {
     return this;
   }
 
+  sortBy(searchOrder) {
+    this.searchSortOrder = searchOrder;
+    return this;
+  }
+
   getURL() {
     return `https://willhaben.at/iad/kaufen-und-verkaufen/marktplatz/-${
       this.searchCategory
@@ -234,7 +248,8 @@ class WillhabenSearch {
         : ""
     }${this.searchPeriode ? `&periode=${this.searchPeriode}` : ""}${
       this.searchPriceFrom != null ? `&PRICE_FROM=${this.searchPriceFrom}` : ""
-    }${this.searchPriceTo != null ? `&PRICE_TO=${this.searchPriceTo}` : ""}`;
+    }${this.searchPriceTo != null ? `&PRICE_TO=${this.searchPriceTo}` : ""}
+    ${this.searchSortOrder ? `&sort=${this.searchSortOrder}` : ""}`;
   }
 
   search() {
