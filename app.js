@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
-const fs = require("node:fs/promises");
+const fsp = require("node:fs/promises");
+const fs = require("node:fs");
 
 // Willhaben links: https://www.willhaben.at/robots.txt
 // Willhaben Marketplace Categories: https://www.willhaben.at/sitemap/sitemapindex-marktplatz-detail.xml
@@ -83,20 +84,20 @@ async function scrapeCategories() {
         });
       console.log(categoryCounter + " from " + categories.length);
 
-      await fs.writeFile("./categories.json", JSON.stringify(categories));
+      await fsp.writeFile("./categories.json", JSON.stringify(categories));
     } while (categoryCounter < categories.length);
     resolve("./categories.json");
   });
 }
 
-async function getCategoriesByName(categoryName) {
-  const fileContent = await fs.readFile("./categories.json");
+function getCategoriesByName(categoryName) {
+  const fileContent = fs.readFileSync("./categories.json");
   const categories = JSON.parse(fileContent);
   return categories.filter((c) => c.label == categoryName);
 }
 
-async function getCategoryById(categoryId) {
-  const fileContent = await fs.readFile("./categories.json");
+function getCategoryById(categoryId) {
+  const fileContent = fs.readFileSync("./categories.json");
   const categories = JSON.parse(fileContent);
   return categories.filter((c) => c.id == categoryId)[0];
 }
@@ -132,12 +133,11 @@ class WillhabenSearch {
   }
 
   category(categoryId) {
-    return getCategoryById(categoryId).then((category) => {
-      this.searchCategory = category.uri.substring(
-        category.uri.lastIndexOf("/") + 1
-      );
-      return this;
-    });
+    const category = getCategoryById(categoryId)
+    this.searchCategory = category.uri.substring(
+      category.uri.lastIndexOf("/") + 1
+    );
+    return this;
   }
 
   condition(condition) {
